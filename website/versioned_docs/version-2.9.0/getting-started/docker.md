@@ -65,13 +65,46 @@ Clone the repo: `git clone git@github.com:mirumee/saleor-platform.git --recursiv
 $ cd saleor-platform
 ```
 
-**5. Build the containers using `docker-compose`**
+**4. Backup the storefront and dashboard Dockerfile's**
+
+Make a copy of the dashboard and storefront `Dockerfile` and `Dockerfile.dev` files that you will copy back inside the correct directories after checking out to the current versions.
+
+```shell-session
+$ mkdir -p dockerfiles/storefront dockerfiles/dashboard
+$ cp saleor-storefront/Dockerfile* dockerfiles/storefront
+$ cp saleor-dashboard/Dockerfile* dockerfiles/dashboard
+```
+
+**5. Update to the latest working versions**
+
+[Saleor Core (API)](https://github.com/mirumee/saleor)
+```shell-session
+$ cd saleor && git checkout 2.9.1 && cd .. 
+```
+[Saleor Dashboard](https://github.com/mirumee/saleor-dashboard)
+```shell-session
+$ cd saleor-dashboard && git checkout v2.0.0 && cd ..
+```
+[Saleor Storefront](https://github.com/mirumee/saleor-storefront)
+```shell-session
+$ cd saleor-storefront && git checkout v0.7.0 && cd ..
+```
+
+**6. Move Storefront and Dashboard Dockerfile's into the newly updated directories**
+
+```shell-session
+$ mv dockerfiles/storefront/Dockerfile* saleor-storefront/
+$ mv dockerfiles/dashboard/Dockerfile* saleor-dashboard/
+$ rm -rf dockerfiles
+```
+
+**7. Build the containers using `docker-compose`**
 
 ```shell-session
 $ docker-compose build
 ```
 
-**6. Prepare the database**
+**8. Prepare the database**
 
 ```shell-session
 $ docker-compose run --rm api python3 manage.py migrate
@@ -83,7 +116,7 @@ $ docker-compose run --rm api python3 manage.py populatedb --createsuperuser
 The `--createsuperuser` argument creates an admin account for `admin@example.com` with the password set to `admin`.
 :::
 
-**7. Run the containers**
+**9. Run the containers**
 
 ```shell-session
 $ docker-compose up
