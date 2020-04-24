@@ -13,14 +13,7 @@ Before you are ready to run Saleor, you will need additional software installed 
 
 ### Python 3
 
-Saleor requires Python version 3.7 or later. A compatible version comes pre-installed with most current Linux systems. If not, consult your Linux distributor for instructions on how to install Python 3.7 or 3.8.
-
-:::note
-If you get error `ModuleNotFoundError: No module named '_cffi_backend'` install cffi: 
-`pip install cffi`
-
-If you have trouble compiling uswgi check that you have the dev tools for your version of python: `apt-get install python3.x-dev`.
-:::
+Saleor requires Python version 3.7 or later.
 
 ### Node.js
 
@@ -105,6 +98,13 @@ We strongly recommend [creating a virtual environment](https://docs.python.org/3
 ```shell-session
 $ pip install -r requirements.txt
 ```
+
+:::note
+If you get error `ModuleNotFoundError: No module named '_cffi_backend'` install cffi:
+`pip install cffi`
+
+If you have trouble compiling uswgi check that you have the dev tools for your version of python: `apt-get install python3.x-dev`.
+:::
 
 ### 4. Set `SECRET_KEY` environment variable
 
